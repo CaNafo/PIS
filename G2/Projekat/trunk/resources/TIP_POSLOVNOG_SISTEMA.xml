@@ -1,0 +1,25 @@
+<table name="TIP_POSLOVNOG_SISTEMA">
+<column name="TPS_OZNAKA" data_type="CHAR" null="NO" autoincrement="NO" isName="false" length="2" />
+<column name="TPS_NAZIV" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" length="80" />
+<pk name="PK_TIP_POSLOVNOG_SISTEMA">
+<column name="TPS_OZNAKA" />
+</pk>
+<reference table_name="ORGANIZACIONA_JEDINICA">
+<column name="TPS_OZNAKA" />
+<column name="PS_IDENTIFIKATOR" />
+<column name="Drzava_oznaka" />
+</reference>
+<reference table_name="ORGANIZACIONA_JEDINICA">
+<column name="TPS_OZNAKA" />
+</reference>
+<reference table_name="POSLOVNI_SISTEM">
+<column name="TPS_OZNAKA" />
+</reference>
+<reference table_name="POVEZANI_SISTEMI">
+<column name="TPS_OZNAKA" />
+</reference>
+<reference table_name="POVEZANI_SISTEMI">
+<column name="TPS_OZNAKA" />
+<column name="PS_IDENTIFIKATOR" />
+</reference>
+</table>

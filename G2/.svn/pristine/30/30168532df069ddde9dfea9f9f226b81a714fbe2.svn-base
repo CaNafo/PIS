@@ -1,0 +1,17 @@
+<table name="ISTORIJA_UREDJENJA">
+<column name="IU_redni_broj" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="DR_oznaka" data_type="CHAR" null="NO" autoincrement="NO" isName="false" />
+<column name="DU_oznaka" data_type="CHAR" null="NO" autoincrement="NO" isName="false" />
+<column name="IU_od" data_type="DATE" null="NO" autoincrement="NO" isName="false" />
+<column name="IU_do" data_type="DATE" null="NO" autoincrement="NO" isName="false" />
+<pk name="PK_ISTORIJA_UREDJENJA">
+<column name="DR_oznaka" />
+<column name="IU_redni_broj" />
+</pk>
+<fk name="FK_KROZ_ISTORIJU" parent_table="DRZAVA" >
+<column parent_name="DR_oznaka" child_name="DR_oznaka" />
+</fk>
+<fk name="FK_ISTORIJAT_URE_ENJA" parent_table="DRZAVNO_UREDJENJE" >
+<column parent_name="DU_oznaka" child_name="DU_oznaka" />
+</fk>
+</table>

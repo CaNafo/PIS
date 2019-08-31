@@ -1,0 +1,207 @@
+package helpers;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Vector;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
+
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+
+import view.LogsView;
+
+public class DodavanjeDozvola extends JPanel {
+	
+	private String[] columnNames = {"ID dozvole", "Naziv dozvole"};
+	String[] uloge = { "Administrator", "Menadžer", "Šef", "Radnik"};
+	private JTable table;
+	private DatabaseConnection conn;	
+	private Statement stmt;
+	private JButton ok;
+	
+	private JComboBox listaUloga;
+	private boolean modification;
+	
+	Vector<Vector<String>> data = null;
+	
+	public DodavanjeDozvola(boolean modification) {
+		this.modification = modification;
+		
+		setLayout(new BorderLayout());
+
+		try {
+			conn = DatabaseConnection.getInstance();
+			stmt = conn.getDbConnection().createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		table = new JTable(0,columnNames.length);
+		ok = new JButton("Dodaj dozvole");
+		ok.addActionListener(actionListener);
+		listaUloga = new JComboBox(uloge);
+		if(modification)
+			listaUloga.setSelectedIndex(0);
+		else {
+			listaUloga.setSelectedIndex(1);
+		}
+		listaUloga.addActionListener(comboBoxActionListener);
+		fillTable();
+		table.setBorder(BorderFactory.createEmptyBorder(50, 10, 10, 10));		
+		table.setFocusable(false);
+		
+		table.setIntercellSpacing(new Dimension(0, 0));
+		table.setVisible(true);
+		
+		table.setBorder(BorderFactory.createEmptyBorder(25, 10, 10, 10));
+		
+		DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
+		cellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		for(int i = 0; i<table.getColumnCount();i++) {
+			table.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+		}
+		
+		
+			table.getTableHeader().setDefaultRenderer(cellRenderer);
+			table.getTableHeader().setBorder(BorderFactory.createBevelBorder(0));
+			
+			JScrollPane tableScroll = new JScrollPane(table);
+			add(tableScroll,BorderLayout.CENTER);
+			add(ok, BorderLayout.SOUTH);
+			add(listaUloga, BorderLayout.NORTH);
+			showDozvole();
+	}
+	
+	private void fillTable() {
+		int DOZ_ID;
+		int i = 0;
+		String DOZ_Naziv;
+
+		try {
+						
+			ResultSet rs = stmt.executeQuery("SELECT * FROM Dozvola");
+			data = new Vector<>();
+			while(rs.next()) {
+				data.add(new Vector<>());
+				DOZ_ID = rs.getInt("DOZ_ID");
+				DOZ_Naziv = rs.getString("DOZ_Naziv");				
+				
+				data.get(i).add(DOZ_ID+"");
+				data.get(i).add(DOZ_Naziv);
+				
+				i++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for(i=0;i<table.getColumnCount();i++)
+		{
+		TableColumn column1 = table.getTableHeader().getColumnModel().getColumn(i);
+		  
+		column1.setHeaderValue(columnNames[i]);
+		} 
+		TableModel model = table.getModel(); 
+		
+		for(i=0; i<data.size();i++) {
+			((DefaultTableModel) model).addRow(new String[]{data.get(i).get(0), data.get(i).get(1)});
+		}
+		
+		table.setModel(model);
+	}
+
+	private void showDozvole() {
+		
+		JDialog logs = new JDialog();		
+		
+		if(data!=null) {
+			logs.setTitle("Dozvole Window");
+			logs.setDefaultCloseOperation(logs.DISPOSE_ON_CLOSE);
+			logs.setSize(new Dimension(500, 600));
+			logs.setMinimumSize(new Dimension(450, 600));
+			logs.setLocationRelativeTo(null);	
+			logs.add(this);
+			logs.setVisible(true);
+		}
+	}
+	
+	ActionListener actionListener = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Vector<Integer> dozvole = new Vector<>();
+			int dozvolaID = 0;
+			
+			switch (listaUloga.getSelectedIndex()) {
+			case 0:
+				if(modification)
+					dozvolaID = 1;
+				else {
+					dozvolaID = 2;
+				}
+				break;
+			case 1:
+				dozvolaID = 2;
+				break;
+			case 2:
+				dozvolaID = 3;
+				break;
+			case 3:
+				dozvolaID = 4;
+				break;
+
+			default:
+				break;
+			}
+			
+			for(int i=0;i<table.getRowCount();i++) {
+				if(table.isRowSelected(i) ){
+					dozvole.add(Integer.parseInt(table.getModel().getValueAt(i, 0).toString()));
+				}
+			}
+			
+				for(int i=0;i<dozvole.size();i++) {
+					try {
+						stmt.execute("INSERT INTO [Lista dozvola] values("+dozvole.get(i)+","+dozvolaID+")");
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}				
+			}
+			JOptionPane.showMessageDialog(null, "Dozvole uspješno dodate!");
+		}
+	};
+	
+	ActionListener comboBoxActionListener = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(listaUloga.getSelectedIndex()==0 && !modification) {
+				listaUloga.setSelectedIndex(1);
+				JOptionPane.showMessageDialog(null, "Nemate dozvolu za upravljanje administratorskom ulogom!");				
+			}
+		}
+	};
+}
+

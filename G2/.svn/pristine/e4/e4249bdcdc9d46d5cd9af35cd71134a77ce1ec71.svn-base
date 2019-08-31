@@ -1,0 +1,53 @@
+package view;
+
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.util.Vector;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import helpers.NameValuePair;
+import model.TableColumn;
+
+@SuppressWarnings("serial")
+public class BasicField extends JPanel implements TableFieldInterface {
+
+	private TableColumn column;
+	private JLabel label;
+	private JTextField text;
+
+	public BasicField(TableColumn column) {
+		this.column = column;
+
+		setLayout(new FlowLayout());
+		
+		label = new JLabel(column.getName()+": ");
+		text = new JTextField();
+		text.setPreferredSize(new Dimension(100, 30));
+		
+		add(label);
+		add(text);
+	}
+
+	@Override
+	public Vector<NameValuePair> getValues() {
+		Vector<NameValuePair> ret = new Vector<>();
+		ret.add(new NameValuePair(column.getName(), text.getText()));
+		return ret;
+	}
+
+	@Override
+	public Boolean isEmpty() {
+		if(text.getText().length()==0)
+			return true;
+		else return false;
+	}
+
+	@Override
+	public Boolean isNullable() {
+		return column.getIsNull();
+	}
+
+}

@@ -1,0 +1,13 @@
+<table name="DRZAVNO_UREDJENJE">
+<column name="DU_oznaka" data_type="CHAR" null="NO" autoincrement="NO" isName="false" length="2" />
+<column name="DU_naziv" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" length="50" />
+<pk name="PK_DRZAVNO_UREDJENJE">
+<column name="DU_oznaka" />
+</pk>
+<reference table_name="DRZAVA">
+<column name="DU_oznaka" />
+</reference>
+<reference table_name="ISTORIJA_UREDJENJA">
+<column name="DU_oznaka" />
+</reference>
+</table>

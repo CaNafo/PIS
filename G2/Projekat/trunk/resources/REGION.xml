@@ -1,0 +1,29 @@
+<table name="REGION">
+<column name="REG_oznaka" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="TR_oznaka" data_type="CHAR" null="NO" autoincrement="NO" isName="false" length="1" />
+<column name="Regionalni centar" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="DRZ_DR_oznaka" data_type="CHAR" null="NO" autoincrement="NO" isName="false" length="3" />
+<column name="REG_naziv" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" length="60" />
+<pk name="PK_REGION">
+<column name="REG_oznaka" />
+</pk>
+<fk name="FK_PRIPADA_DRZAVI" parent_table="DRZAVA" >
+<column parent_name="DR_oznaka" child_name="DRZ_DR_oznaka" />
+</fk>
+<fk name="FK_REGIONALNI_CENTAR" parent_table="NASELJENO_MJESTO" >
+<column parent_name="DR_oznaka" child_name="DRZ_DR_oznaka" />
+<column parent_name="NM_oznaka" child_name="Regionalni centar" />
+</fk>
+<fk name="FK_TIPIZACIJA_REGIONA" parent_table="TIP_REGIONA" >
+<column parent_name="TR_oznaka" child_name="TR_oznaka" />
+</fk>
+<reference table_name="NASELJA_U_REGIONU">
+<column name="REG_oznaka" />
+</reference>
+<reference table_name="SASTAV_REGIONA">
+<column name="REG_oznaka" />
+</reference>
+<reference table_name="SASTAV_REGIONA">
+<column name="REG_oznaka" />
+</reference>
+</table>

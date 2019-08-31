@@ -1,0 +1,16 @@
+<table name="TipAtributa">
+<column name="TA_ID" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="TA_Naziv" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" />
+<column name="TA_Visestrukost" data_type="BIT" null="NO" autoincrement="NO" isName="false" />
+<column name="TA_Format" data_type="VARCHAR" null="NO" autoincrement="NO" isName="false" />
+<column name="TA_Obavezan" data_type="BIT" null="NO" autoincrement="NO" isName="false" />
+<pk name="PK_TIPATRIBUTA">
+<column name="TA_ID" />
+</pk>
+<reference table_name="AtributGradje">
+<column name="TA_ID" />
+</reference>
+<reference table_name="Set Atributa">
+<column name="TA_ID" />
+</reference>
+</table>

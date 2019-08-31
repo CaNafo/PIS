@@ -1,0 +1,27 @@
+<table name="TipClanstva">
+<column name="TC_ID" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="PS_Tip_oznaka" data_type="CHAR" null="NO" autoincrement="NO" isName="false" length="2" />
+<column name="OJ_Tip_oznaka" data_type="CHAR" null="NO" autoincrement="NO" isName="false" length="2" />
+<column name="Poslovni_sistem_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="Drzava_oznaka" data_type="CHAR" null="NO" autoincrement="NO" isName="false" length="3" />
+<column name="Organizaciona_jedinica_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="TC_Besplatno" data_type="BIT" null="NO" autoincrement="NO" isName="false" />
+<column name="TC_BrDanaVazenja" data_type="INTEGER" null="YES" autoincrement="NO" isName="false" />
+<column name="TC_CijenaPoPeriodu" data_type="DECIMAL" null="YES" autoincrement="NO" isName="false" />
+<column name="TC_Naziv" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" length="30" />
+<pk name="PK_TIPCLANSTVA">
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+<column name="TC_ID" />
+</pk>
+<fk name="FK_Vazi za instituciju" parent_table="ORGANIZACIONA_JEDINICA" >
+<column parent_name="PS_Tip_oznaka" child_name="PS_Tip_oznaka" />
+<column parent_name="OJ_Tip_oznaka" child_name="OJ_Tip_oznaka" />
+<column parent_name="Poslovni_sistem_ID" child_name="Poslovni_sistem_ID" />
+<column parent_name="Drzava_oznaka" child_name="Drzava_oznaka" />
+<column parent_name="Organizaciona_jedinica_ID" child_name="Organizaciona_jedinica_ID" />
+</fk>
+</table>

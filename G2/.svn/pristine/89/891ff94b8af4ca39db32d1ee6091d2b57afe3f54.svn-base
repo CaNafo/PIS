@@ -1,0 +1,127 @@
+package application;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import model.TableFormModel;
+import view.MenuBarView;
+import view.SearchView;
+import view.StabloView;
+import view.TableToolbar;
+import view.TableView;
+
+public class MainVindow extends JFrame {
+
+
+	private static final long serialVersionUID = 1L;
+	
+	private MenuBarView menuBarView;
+	private TableFormModel tableModel;
+	private TableView tableView;
+	private JPanel tablePanel;
+	private TableToolbar tableToolbar;
+	private JSplitPane jSplitPane;
+	private JButton radSaGradjom;
+	
+	private String currentTable = "";
+	
+	public MainVindow() {
+		setLayout(new BorderLayout());
+		radSaGradjom = new JButton("Rad sa graðom");
+		setLookAndFeel();
+
+		menuBarView = new MenuBarView();
+
+		setJMenuBar(menuBarView);
+		jSplitPane = new JSplitPane(SwingConstants.VERTICAL);
+		jSplitPane.add(addStablo(this));
+
+		addTable("Poslovni_sistem");
+
+		jSplitPane.add(tablePanel);
+
+		add(jSplitPane, BorderLayout.CENTER);
+
+		setTitle("Multiteka");
+		setSize(1200, 800);
+		setMinimumSize(new Dimension(1024, 680));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+
+		setLocationRelativeTo(null);
+	}
+
+	private StabloView addStablo(MainVindow mainVindow) {
+		StabloView stabloView = new StabloView(mainVindow);
+		return stabloView;
+	}
+
+	public void addTable(String name) {
+		currentTable = name;
+		
+		if (tableView == null) {
+			tablePanel = new JPanel();
+			tablePanel.setLayout(new BorderLayout());
+
+			tableModel = new TableFormModel(name);
+			tableView = new TableView(tableModel);
+			tablePanel.add(tableView, BorderLayout.CENTER);
+
+			tableToolbar = new TableToolbar(tableModel);
+			tableToolbar.setFloatable(false);
+			tablePanel.add(tableToolbar, BorderLayout.NORTH);
+		} else {
+			tablePanel.removeAll();
+			if (!name.equals("Gradja")) {
+				tableModel.changeTableDataModel(name);
+				tableView = new TableView(tableModel);
+				tablePanel.add(tableToolbar, BorderLayout.NORTH);
+				tablePanel.add(tableView, BorderLayout.CENTER);
+			} else {
+				tableModel.changeTableDataModel(name);
+				tableView = new TableView(tableModel);
+				tablePanel.add(tableToolbar, BorderLayout.NORTH);
+				SearchView gradjaView = new SearchView(tableView, tableModel);
+				tablePanel.add(gradjaView, BorderLayout.CENTER);
+				/*JPanel buttonPanel = new JPanel();
+				buttonPanel.setLayout(new GridLayout(1, 4, 4, 4));
+				buttonPanel.add(radSaGradjom);
+				buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+				tablePanel.add(buttonPanel,BorderLayout.SOUTH);*/
+			}
+			repaint();
+			revalidate();
+		}
+	}
+
+	private void setLookAndFeel() {
+		try {
+			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public String getCurrentTable() {
+		return currentTable;
+	}
+}

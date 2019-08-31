@@ -1,0 +1,44 @@
+<table name="TipGradje">
+<column name="TG_ID" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="TG_Naziv" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" />
+<column name="TG_Obrisano" data_type="BIT" null="NO" autoincrement="NO" isName="false" />
+<pk name="PK_TIPGRADJE">
+<column name="TG_ID" />
+</pk>
+<reference table_name="AtributGradje">
+<column name="TG_ID" />
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+<column name="GR_ID" />
+</reference>
+<reference table_name="Gradja">
+<column name="TG_ID" />
+</reference>
+<reference table_name="KonkretnaGradja">
+<column name="TG_ID" />
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+<column name="GR_ID" />
+</reference>
+<reference table_name="Pravila">
+<column name="TG_ID" />
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+<column name="GR_ID" />
+</reference>
+<reference table_name="Pravila">
+<column name="TG_ID" />
+</reference>
+<reference table_name="Set Atributa">
+<column name="TG_ID" />
+</reference>
+</table>

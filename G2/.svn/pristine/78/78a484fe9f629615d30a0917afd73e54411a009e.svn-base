@@ -1,0 +1,11 @@
+<table name="Tip usluge">
+<column name="TU_ID" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="TU_Naziv tipa" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" />
+<column name="TU_Rashod" data_type="BIT" null="NO" autoincrement="NO" isName="false" />
+<pk name="PK_TIP USLUGE">
+<column name="TU_ID" />
+</pk>
+<reference table_name="Usluga">
+<column name="TU_ID" />
+</reference>
+</table>

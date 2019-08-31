@@ -1,0 +1,64 @@
+package model;
+
+public class TableColumn {
+	private String name;
+	private String dataType;
+	private Boolean isNull;
+	private Boolean isAuteincrement;
+
+	private String parrentName = null;
+	private String parrentTable = null;
+
+	
+	public TableColumn(String name, String dataType, Boolean isNull, Boolean isAuteincrement) {
+		this.name = name;
+		this.dataType = dataType;
+		this.isNull = isNull;
+		this.isAuteincrement = isAuteincrement;
+	}
+
+	public TableColumn(String name, String dataType, Boolean isNull, Boolean isAuteincrement, String parrentName,
+			String parrentTable) {
+		this.name = name;
+		this.dataType = dataType;
+		this.isNull = isNull;
+		this.isAuteincrement = isAuteincrement;
+		this.parrentName = parrentName;
+		this.parrentTable = parrentTable;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDataType() {
+		return dataType;
+	}
+
+	public Boolean getIsNull() {
+		return isNull;
+	}
+
+	public Boolean getIsAuteincrement() {
+		return isAuteincrement;
+	}
+
+	public String getParrentName() {
+		return parrentName;
+	}
+
+	public String getParrentTable() {
+		return parrentTable;
+	}
+
+	public void setParrentName(String parrentName) {
+		this.parrentName = parrentName;
+	}
+
+	public void setParrentTable(String parrentTable) {
+		this.parrentTable = parrentTable;
+	}
+
+	
+}

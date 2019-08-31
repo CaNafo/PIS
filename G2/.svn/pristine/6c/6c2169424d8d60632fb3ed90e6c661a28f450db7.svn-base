@@ -1,0 +1,30 @@
+package view;
+
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+
+import model.TableFormModel;
+
+@SuppressWarnings("serial")
+public class InsertUpdateView extends JFrame {
+
+	public static final int INSERT = 1;
+	public static final int UPDATE = 1;
+
+	private TableFormModel model;
+	private int formTask;
+
+	public InsertUpdateView(TableFormModel model, int formTask) {
+		this.model = model;
+		this.formTask = formTask;
+
+		setLayout(new FlowLayout());
+		
+		setSize(new Dimension(800, 600));
+		setVisible(true);
+	}
+
+}

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Gradja" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d6ff6274-e659-4288-8a99-fa823a91b0a5">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<parameter name="ps_naziv" class="java.lang.String" evaluationTime="Early">
+		<parameterDescription><![CDATA[ps_naziv]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Multiteka"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="oj_naziv" class="java.lang.String" evaluationTime="Early">
+		<parameterDescription><![CDATA[oj_naziv]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT  Gradja.GR_Naziv, TipGradje.TG_Naziv, KonkretnaGradja.Poslovni_sistem_ID, KonkretnaGradja.Organizaciona_jedinica_ID,   count(*) ukupno, sum(case when KG_Izdato = 1 then 1 else 0 end) Izdato, 
+sum(case when KG_Rezervisano = 1 then 1 else 0 end) Rezervisano 
+from KonkretnaGradja join Gradja on KonkretnaGradja.GR_ID = Gradja.GR_ID
+join TipGradje on Gradja.TG_ID = TipGradje.TG_ID
+group by KonkretnaGradja.Poslovni_sistem_ID, KonkretnaGradja.Organizaciona_jedinica_ID, Gradja.GR_Naziv,TipGradje.TG_Naziv;]]>
+	</queryString>
+	<field name="GR_Naziv" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="GR_Naziv"/>
+	</field>
+	<field name="TG_Naziv" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TG_Naziv"/>
+	</field>
+	<field name="ukupno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ukupno"/>
+	</field>
+	<field name="Izdato" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Izdato"/>
+	</field>
+	<field name="Rezervisano" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Rezervisano"/>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="7b36dae0-c538-4ffc-912c-f8d7c47d1230"/>
+				<staticText>
+					<reportElement x="395" y="60" width="180" height="20" forecolor="#FFFFFF" uuid="13ac5f18-57a4-4669-91be-01bc3b326778"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Građa]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="24" y="26" width="416" height="44" forecolor="#FFFFFF" uuid="53569e70-6146-4fe4-8557-dbbc4ab32497"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="26" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{ps_naziv}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="450" y="26" width="130" height="24" forecolor="#FFFFFF" uuid="80132f14-bc65-4ead-bfc9-e8b9ea8fbb4a"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{oj_naziv}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="88856575-f657-448f-98b5-9667711fefe1"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="a2bc5a6b-965c-4cf3-96f5-8a4839242e9f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6363f77a-ff9b-4dcd-b210-63ae00705322"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Građa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="111" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="a2b73f49-db49-4245-912f-93e323f2b0c8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="221d98e5-4b45-4b2f-a8f6-0115bc7461dd"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tip]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="222" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="322fc7d9-46b0-44fa-9871-7457309691e6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="001cc77f-86ee-4d08-a5a8-474004da1994"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ukupno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="333" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="7b9882e1-42a1-4a60-89f7-bda1e1e0f941">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9b1a5e23-1992-4f70-9491-2b1071e11ab2"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Izdato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="444" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="4087ef97-291c-4ef4-9ce2-227d88624719">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e3e1827d-353a-4f2c-9a9a-c4ee2cddcabc"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rezervisano]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="333943bd-0302-47fc-b37c-bd4491b6728b"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="111" height="20" uuid="33b8c607-574f-4a6f-b805-8e717bf0aa2f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6363f77a-ff9b-4dcd-b210-63ae00705322"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GR_Naziv}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="111" y="0" width="111" height="20" uuid="5514383f-fe5e-41df-b295-a561f8aba06a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="221d98e5-4b45-4b2f-a8f6-0115bc7461dd"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TG_Naziv}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="222" y="0" width="111" height="20" uuid="a3b91771-346d-49ee-8cbd-6af7e3503558">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="001cc77f-86ee-4d08-a5a8-474004da1994"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ukupno}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="333" y="0" width="111" height="20" uuid="e5a2898a-8ee7-4f4d-a3a3-8350f532a899">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9b1a5e23-1992-4f70-9491-2b1071e11ab2"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Izdato}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="444" y="0" width="111" height="20" uuid="b0648b9a-d63d-4595-8a02-c9065dec7800">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e3e1827d-353a-4f2c-9a9a-c4ee2cddcabc"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Rezervisano}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="bb692491-0fef-4295-bb6e-3a029163a16d"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="b71eac0c-b01d-493a-8101-67ef2b6d945d"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="b5109ac1-eb18-43ab-b15b-7829eb3692cc"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

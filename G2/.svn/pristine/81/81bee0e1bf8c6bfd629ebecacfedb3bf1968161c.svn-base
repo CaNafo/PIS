@@ -1,0 +1,296 @@
+package model;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Vector;
+
+import javax.swing.table.AbstractTableModel;
+
+import dbManipulation.DBManipulation;
+import helpers.DatabaseConnection;
+import helpers.TableXmlParser;
+
+@SuppressWarnings("serial")
+public class TableDataModel extends AbstractTableModel implements SubjectInterface {
+
+	private ArrayList<ObserverInterface> views;
+
+	private String name;
+	private ArrayList<TableColumn> columns;
+	private TableKey primaryKey;
+	private ArrayList<TableKey> foreignKeys;
+	private Vector<Vector<Object>> data;
+	private Vector<String> columnDisplayNames;
+
+//	private Vector<String> selectedRowData = null;
+	private Integer selectedRow = null;
+
+	// TODO Za sada filter nije iskoristen
+	private String filter = "";
+
+	public TableDataModel(String name) {
+		this.name = name;
+		columns = new ArrayList<>();
+		foreignKeys = new ArrayList<>();
+		columnDisplayNames = new Vector<>();
+//		selectedRowData = new Vector<>();
+		views=new ArrayList<>();
+	}
+
+//	public TableDataModel(Vector<Vector<Object>> data, Vector<String> columnDisplayNames, String name) {
+//		this.data = data;
+//		this.columnDisplayNames = columnDisplayNames;
+//		this.name = name;
+//		selectedRowData = new Vector<>();
+//	}
+
+	public TableColumn getColumnByName(String name) {
+		for (TableColumn column : columns)
+			if (column.getName().equals(name))
+				return column;
+		return null;
+	}
+
+	public TableKey getForeignKeyByName(String name) {
+		for (TableKey fk : foreignKeys)
+			if (fk.getName().equals(name))
+				return fk;
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		String s = "Table: " + name + "; Columns:\n";
+		for (TableColumn column : columns) {
+			s += column.toString() + "\n";
+		}
+		s += "Primary key:\n" + primaryKey.toString() + "Foreign Keys:\n";
+		for (TableKey fKey : foreignKeys)
+			s += fKey.toString();
+		return s;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Vector<Vector<Object>> getData() {
+		return data;
+	}
+
+	public ArrayList<TableColumn> getColumns() {
+		return columns;
+	}
+
+	public TableKey getPrimaryKey() {
+		return primaryKey;
+	}
+
+	public ArrayList<TableKey> getForeignKeys() {
+		return foreignKeys;
+	}
+
+//	public void setColumns(ArrayList<TableColumn> columns) {
+//		this.columns = columns;
+//	}
+
+	public void setPrimaryKey(TableKey primaryKey) {
+		this.primaryKey = primaryKey;
+	}
+
+//	public void setForeignKeys(ArrayList<TableKey> foreignKeys) {
+//		this.foreignKeys = foreignKeys;
+//	}
+
+	@Override
+	public int getColumnCount() {
+		return columnDisplayNames.size();
+	}
+
+	@Override
+	public int getRowCount() {
+		return data.size();
+	}
+
+	@Override
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		return data.get(rowIndex).get(columnIndex);
+	}
+
+	public void fetchData() {
+		boolean isFirst = true;
+		String query = "SELECT ";
+		columnDisplayNames.clear();
+		// Izbor vlastitih kolona
+		for (TableColumn column : columns) {
+			Boolean isFK = false;
+			for (TableKey fk : foreignKeys) {
+				for (TableColumn fkColumn : fk.getColumns()) {
+					if (column.getName().equals(fkColumn.getName()))
+						isFK = true;
+				}
+			}
+			Boolean isPK = false;
+			for (TableColumn col : primaryKey.getColumns()) {
+				if (column.equals(col))
+					isPK = true;
+			}
+			if (!isFK || (primaryKey.getColumns().size() == 1 && isPK)) {
+				if (column.getName().toString().toLowerCase().contains("obrisano"))
+					continue;
+				if (isFirst) {
+					query += "[" + name + "].[" + column.getName() + "]";
+					isFirst = false;
+				} else
+					query += ", [" + name + "].[" + column.getName() + "]";
+				columnDisplayNames.add(column.getName());
+			}
+		}
+
+		// Izbor kolona preko stranih kljuèeva
+		for (TableKey fk : foreignKeys) {
+			String nameField = "";
+			TableDataModel parrentTable = new TableXmlParser().getTable(fk.getParentTable());
+			for (TableColumn column : parrentTable.getColumns()) {
+				if (column.getIsName())
+					nameField = column.getName();
+			}
+			if (isFirst) {
+				query += "[" + fk.getName() + "].[" + nameField + "] AS " + "[" + fk.getName() + "]";
+				isFirst = false;
+			} else
+				query += ", [" + fk.getName() + "].[" + nameField + "] AS " + "[" + fk.getName() + "]";
+			columnDisplayNames.add(fk.getName().substring(3, fk.getName().length()));
+
+		}
+		query += " FROM [" + this.getName() + "] ";
+
+		// Join
+		for (TableKey fk : foreignKeys) {
+			query += " LEFT JOIN [" + fk.getParentTable() + "] [" + fk.getName() + "] ON ";
+			Boolean isFirstInJoin = true;
+			for (TableColumn column : fk.getColumns()) {
+				if (isFirstInJoin) {
+					query += "[" + getName() + "].[" + column.getName() + "]=[" + fk.getName() + "].["
+							+ column.getParrentName() + "]";
+					isFirstInJoin = false;
+				} else
+					query += " AND [" + getName() + "].[" + column.getName() + "]=[" + fk.getName() + "].["
+							+ column.getParrentName() + "]";
+			}
+		}
+
+		DBManipulation DBM = DatabaseConnection.getInstance();
+		ResultSet rSet = null;
+		try {
+			Statement statement = DBM.getDbConnection().createStatement();
+			rSet = statement.executeQuery(query);
+			int i = 0;
+			data = new Vector<>();
+			while (rSet.next()) {
+				data.add(new Vector<>());
+				for (int j = 0; j < columnDisplayNames.size(); j++) {
+					data.get(i).add(rSet.getObject(j + 1));
+				}
+				i++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public String getColumnName(int arg0) {
+		return columnDisplayNames.get(arg0);
+	}
+
+	public Vector<String> getColumnDisplayNames() {
+		return columnDisplayNames;
+	}
+
+	public void setData(Vector<Vector<Object>> data) {
+		this.data = data;
+	}
+
+	public void setColumnDisplayNames(Vector<String> columnDisplayNames) {
+		this.columnDisplayNames = columnDisplayNames;
+	}
+
+	public void updateSelection() {
+		if (selectedRow >= data.size() - 1)
+			selectedRow = null;
+	}
+
+	public Integer getSelectedIndex() {
+		return selectedRow;
+	}
+
+	public void setSelectedIndex(Integer selectedIndex) {
+		this.selectedRow = selectedIndex;
+	}
+
+	@Override
+	public void addObserver(ObserverInterface observer) {
+		views.add(observer);
+	}
+
+	@Override
+	public void removeObserver(ObserverInterface observer) {
+		if (views.size() > 0)
+			for (ObserverInterface oi : views)
+				if (oi == observer) {
+					views.remove(observer);
+					break;
+				}
+	}
+
+	@Override
+	public void notifyAllObservers() {
+		for (ObserverInterface observer : views)
+			observer.update();
+	}
+
+	public String makeWhereClause() throws NullPointerException {
+		if (getSelectedIndex() == null)
+			throw new NullPointerException();
+		String where = " WHERE ";
+		Boolean isFirst = true;
+		for (int i = 0; i < getPrimaryKey().getColumns().size(); i++) {
+			String pkName = getPrimaryKey().getColumns().get(i).getName();
+			for (int j = 0; j < getColumnDisplayNames().size(); j++) {
+				String colName = getColumnDisplayNames().get(j);
+				String colValue = "";
+				try {
+					colValue = getData().get(getSelectedIndex()).get(j).toString();
+				} catch (Exception e) {
+					// Nije potrebno obraditi ovaj izuzetak
+					// On se dogadja jer pokusavamo pokupiti vrijednost iz kolone koja nije
+					// popunjena
+					// a to nam ne predstavlja problem
+				}
+				if (pkName.equals(colName)) {
+					if (isFirst) {
+						where += "[" + pkName + "]=" + colValue;
+						isFirst = false;
+					} else
+						where += " AND [" + pkName + "]=" + colValue;
+				}
+			}
+		}
+		return where;
+	}
+
+	public void deleteEntry() throws NullPointerException, SQLException {
+		String query = "DELETE FROM [" + getName() + "]" + makeWhereClause();
+		System.out.println(query);
+		Statement statement = null;
+		statement = DatabaseConnection.getInstance().getDbConnection().createStatement();
+		statement.execute(query);
+
+		updateSelection();
+		notifyAllObservers();
+	}
+
+}

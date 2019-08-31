@@ -1,0 +1,53 @@
+package view;
+
+import java.util.Date;
+import java.util.Vector;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import com.toedter.calendar.JCalendar;
+
+import helpers.NameValuePair;
+import model.TableColumn;
+
+@SuppressWarnings("serial")
+public class DateField extends JPanel implements TableFieldInterface{
+
+	private TableColumn column;
+	private JLabel label;
+	private JCalendar calendar;
+	
+	public DateField(TableColumn column) {
+		this.column=column;
+		
+		label=new JLabel(column.getName()+": ");
+		calendar=new JCalendar();
+		
+		add(label);
+		add(calendar);
+	}
+	
+	@Override
+	public Vector<NameValuePair> getValues() {
+		Vector<NameValuePair> ret = new Vector<>();
+		Date date=calendar.getDate();
+//		ret.add(new NameValuePair(column.getName(), text.getText()));
+//		SQL> INSERT INTO t(dob) VALUES(TO_DATE('17/12/2015', 'DD/MM/YYYY'));
+		return ret;
+	}
+
+	@Override
+	public Boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean isNullable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

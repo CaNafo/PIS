@@ -1,0 +1,14 @@
+<table name="Kvalifikacije radnika">
+<column name="Zaposleni_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="Strucna_sprema_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<pk name="PK_KVALIFIKACIJE RADNIKA">
+<column name="Zaposleni_ID" />
+<column name="Strucna_sprema_ID" />
+</pk>
+<fk name="FK_Kvalifikacije radnika2" parent_table="Strucna sprema" >
+<column parent_name="SS_ID" child_name="Strucna_sprema_ID" />
+</fk>
+<fk name="FK_Vazi za radnika" parent_table="Zaposleni" >
+<column parent_name="Zaposleni_ID" child_name="Zaposleni_ID" />
+</fk>
+</table>

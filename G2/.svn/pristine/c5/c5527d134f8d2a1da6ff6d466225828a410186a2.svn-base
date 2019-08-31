@@ -1,0 +1,76 @@
+package controller;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JOptionPane;
+import javax.swing.JTree;
+import javax.swing.SwingUtilities;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.TreePath;
+
+import application.MainVindow;
+import model.StabloTabelaModel;
+import model.TableDataModel;
+import model.TableFormModel;
+
+
+public class StabloController extends MouseAdapter implements
+		TreeSelectionListener
+{
+	Object node = null;
+	JTree tree = null;
+	MainVindow mainVindow;
+	
+	public StabloController(MainVindow mainVindow) {
+		this.mainVindow = mainVindow;
+	}
+	
+	@Override
+	public void valueChanged(TreeSelectionEvent e)
+	{
+		tree = (JTree) e.getSource();
+		node = tree.getLastSelectedPathComponent();
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{
+		if (tree != null)
+		{
+			int row = tree.getRowForLocation(e.getX(), e.getY());
+
+			if (row == -1) 
+			{
+				tree.clearSelection();
+			}
+			else 
+			{
+		         TreePath selPath = tree.getPathForLocation(e.getX(), e.getY());
+		         tree.setSelectionPath(selPath);
+			}
+		}
+		if (e.getSource() instanceof JTree)
+		{
+			if (e.getClickCount() == 2)
+			{
+				try {
+					String tabela = ((StabloTabelaModel)node).getKod();
+					mainVindow.addTable(tabela);
+				} catch (Exception e2) {
+
+				}
+				
+				
+				
+			}
+			else if (e.isMetaDown()) 
+			{
+				
+				JOptionPane.showMessageDialog(SwingUtilities.getRoot(tree), "Desni klik na " + node,
+						"Poruka", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+	}
+
+}

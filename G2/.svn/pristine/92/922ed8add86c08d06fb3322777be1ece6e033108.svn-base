@@ -1,0 +1,29 @@
+package model;
+
+import java.util.Vector;
+
+public class InsertUpdateModel {
+
+	private TableDataModel table;
+	private Vector<TableColumn> columns;
+	private Vector<TableKey> foreignKeys;
+	
+	public InsertUpdateModel(TableDataModel table) {
+		this.table = table;
+		columns = new Vector<>();
+		foreignKeys = new Vector<>();
+
+		for (TableColumn tableColumn : table.getColumns()) {
+			Boolean isInFK = false;
+			for (TableKey fk : table.getForeignKeys()) {
+				for (TableColumn fkColumn : fk.getColumns())
+					if (tableColumn.getName().equals(fkColumn.getName()))
+						isInFK = true;
+				foreignKeys.add(fk);
+			}
+			if (!isInFK && !tableColumn.getIsAuteincrement())
+				columns.add(tableColumn);
+		}
+	}
+
+}

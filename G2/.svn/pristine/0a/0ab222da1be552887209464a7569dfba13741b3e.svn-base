@@ -1,0 +1,321 @@
+<table name="LogoviPoslovnogSistema">
+<column name="PoslovniSistemID" data_type="INTEGER" null="YES" autoincrement="NO" isName="false" />
+<column name="KorisnikID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="KorisnickoIme" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" length="128" />
+<column name="Vrijeme" data_type="TIME" null="NO" autoincrement="NO" isName="false" />
+<column name="Datum" data_type="DATE" null="NO" autoincrement="NO" isName="false" />
+<column name="IPadresa" data_type="VARCHAR" null="YES" autoincrement="NO" isName="false" length="16" />
+<reference table_name="AtributGradje">
+<column name="TG_ID" />
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+<column name="GR_ID" />
+</reference>
+<reference table_name="AtributGradje">
+<column name="TA_ID" />
+</reference>
+<reference table_name="Clan">
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+</reference>
+<reference table_name="Clan">
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+<column name="TC_ID" />
+</reference>
+<reference table_name="DRZAVA">
+<column name="DR_oznaka" />
+</reference>
+<reference table_name="DRZAVA">
+<column name="DU_oznaka" />
+</reference>
+<reference table_name="DRZAVA">
+<column name="DR_oznaka" />
+<column name="NM_oznaka" />
+</reference>
+<reference table_name="Finansijska kartica">
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+</reference>
+<reference table_name="Gradja">
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+</reference>
+<reference table_name="Gradja">
+<column name="TG_ID" />
+</reference>
+<reference table_name="Hijerarhija zaposlenih">
+<column name="Zaposleni_ID" />
+</reference>
+<reference table_name="Hijerarhija zaposlenih">
+<column name="Zaposleni_ID" />
+</reference>
+<reference table_name="Istorija izdavanja">
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+<column name="TC_ID" />
+<column name="ORG_PS_Tip_oznaka" />
+<column name="Cl_ID" />
+</reference>
+<reference table_name="Istorija izdavanja">
+<column name="KG_ID" />
+</reference>
+<reference table_name="Istorija izdavanja">
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+</reference>
+<reference table_name="Istorija zaposlenja">
+<column name="POS_ID" />
+</reference>
+<reference table_name="Istorija zaposlenja">
+<column name="Zaposleni_ID" />
+</reference>
+<reference table_name="ISTORIJA_UREDJENJA">
+<column name="DR_oznaka" />
+</reference>
+<reference table_name="ISTORIJA_UREDJENJA">
+<column name="DU_oznaka" />
+</reference>
+<reference table_name="KonkretnaGradja">
+<column name="TG_ID" />
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+<column name="GR_ID" />
+</reference>
+<reference table_name="Korisnik">
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+</reference>
+<reference table_name="Kvalifikacije radnika">
+<column name="SS_ID" />
+</reference>
+<reference table_name="Kvalifikacije radnika">
+<column name="Zaposleni_ID" />
+</reference>
+<reference table_name="Lista dozvola">
+<column name="DOZ_ID" />
+</reference>
+<reference table_name="Lista dozvola">
+<column name="UL_ID" />
+</reference>
+<reference table_name="Lista Uloga">
+<column name="KOR_ID" />
+</reference>
+<reference table_name="Lista Uloga">
+<column name="UL_ID" />
+</reference>
+<reference table_name="NASELJA_U_REGIONU">
+<column name="DR_oznaka" />
+<column name="NM_oznaka" />
+</reference>
+<reference table_name="NASELJA_U_REGIONU">
+<column name="REG_oznaka" />
+</reference>
+<reference table_name="NASELJENO_MJESTO">
+<column name="DR_oznaka" />
+</reference>
+<reference table_name="OPSTINA">
+<column name="DR_oznaka" />
+</reference>
+<reference table_name="OPSTINA">
+<column name="DR_oznaka" />
+<column name="NM_oznaka" />
+</reference>
+<reference table_name="ORGANIZACIONA_JEDINICA">
+<column name="DR_oznaka" />
+<column name="NM_oznaka" />
+</reference>
+<reference table_name="ORGANIZACIONA_JEDINICA">
+<column name="TPS_OZNAKA" />
+<column name="PS_IDENTIFIKATOR" />
+<column name="Drzava_oznaka" />
+</reference>
+<reference table_name="ORGANIZACIONA_JEDINICA">
+<column name="TPS_OZNAKA" />
+</reference>
+<reference table_name="ORGANIZACIONA_SEMA">
+<column name="PS_Tip_oznaka" />
+</reference>
+<reference table_name="ORGANIZACIONA_SEMA">
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+</reference>
+<reference table_name="ORGANIZACIONA_SEMA">
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+</reference>
+<reference table_name="ORGANIZACIONA_SEMA">
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+</reference>
+<reference table_name="ORGANIZACIONA_SEMA">
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+</reference>
+<reference table_name="ORGANIZACIONA_SEMA">
+<column name="Organizaciona_jedinica_ID" />
+</reference>
+<reference table_name="POSLOVNI_SISTEM">
+<column name="DR_oznaka" />
+</reference>
+<reference table_name="POSLOVNI_SISTEM">
+<column name="DR_oznaka" />
+<column name="NM_oznaka" />
+</reference>
+<reference table_name="POSLOVNI_SISTEM">
+<column name="TPS_OZNAKA" />
+</reference>
+<reference table_name="POVEZANI_SISTEMI">
+<column name="TPS_OZNAKA" />
+</reference>
+<reference table_name="POVEZANI_SISTEMI">
+<column name="TPS_OZNAKA" />
+<column name="PS_IDENTIFIKATOR" />
+</reference>
+<reference table_name="POVEZANI_SISTEMI">
+<column name="PS_IDENTIFIKATOR" />
+<column name="Drzava_oznaka" />
+</reference>
+<reference table_name="POVEZANI_SISTEMI">
+<column name="Drzava_oznaka" />
+</reference>
+<reference table_name="Pravila">
+<column name="TG_ID" />
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+<column name="GR_ID" />
+</reference>
+<reference table_name="Pravila">
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+</reference>
+<reference table_name="Pravila">
+<column name="TG_ID" />
+</reference>
+<reference table_name="REGION">
+<column name="DR_oznaka" />
+</reference>
+<reference table_name="REGION">
+<column name="DR_oznaka" />
+<column name="NM_oznaka" />
+</reference>
+<reference table_name="REGION">
+<column name="TR_oznaka" />
+</reference>
+<reference table_name="RezervisaniMaterijal">
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+<column name="TC_ID" />
+<column name="ORG_PS_Tip_oznaka" />
+<column name="Cl_ID" />
+</reference>
+<reference table_name="RezervisaniMaterijal">
+<column name="KG_ID" />
+</reference>
+<reference table_name="RezervisaniMaterijal">
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+</reference>
+<reference table_name="SASTAV_DRZAVE">
+<column name="DR_oznaka" />
+</reference>
+<reference table_name="SASTAV_DRZAVE">
+<column name="DR_oznaka" />
+</reference>
+<reference table_name="SASTAV_NASELJA">
+<column name="DR_oznaka" />
+<column name="NM_oznaka" />
+</reference>
+<reference table_name="SASTAV_NASELJA">
+<column name="DR_oznaka" />
+<column name="OP_oznaka" />
+</reference>
+<reference table_name="SASTAV_REGIONA">
+<column name="REG_oznaka" />
+</reference>
+<reference table_name="SASTAV_REGIONA">
+<column name="REG_oznaka" />
+</reference>
+<reference table_name="Set Atributa">
+<column name="TA_ID" />
+</reference>
+<reference table_name="Set Atributa">
+<column name="TG_ID" />
+</reference>
+<reference table_name="TipClanstva">
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+</reference>
+<reference table_name="Usluga">
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+<column name="TC_ID" />
+<column name="ORG_PS_Tip_oznaka" />
+<column name="Cl_ID" />
+</reference>
+<reference table_name="Usluga">
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+</reference>
+<reference table_name="Usluga">
+<column name="TU_ID" />
+</reference>
+<reference table_name="Usluga">
+<column name="Zaposleni_ID" />
+</reference>
+<reference table_name="Zaposleni">
+<column name="POS_ID" />
+</reference>
+<reference table_name="Zaposleni organizacione jedinice">
+<column name="PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+</reference>
+</table>

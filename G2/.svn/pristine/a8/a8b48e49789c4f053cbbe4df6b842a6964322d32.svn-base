@@ -1,0 +1,16 @@
+<table name="Lista Uloga">
+<column name="LU_ID" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="KOR_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="UL_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<pk name="PK_LISTA ULOGA">
+<column name="LU_ID" />
+<column name="KOR_ID" />
+<column name="UL_ID" />
+</pk>
+<fk name="FK_Ima uloge" parent_table="Korisnik" >
+<column parent_name="KOR_ID" child_name="KOR_ID" />
+</fk>
+<fk name="FK_Pripada listi uloga" parent_table="Uloga" >
+<column parent_name="UL_ID" child_name="UL_ID" />
+</fk>
+</table>

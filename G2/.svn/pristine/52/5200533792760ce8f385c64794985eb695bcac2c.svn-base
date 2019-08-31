@@ -1,0 +1,109 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import java.awt.Font;
+import java.awt.Insets;
+import java.awt.event.ActionListener;
+
+import javax.swing.SwingConstants;
+
+public class LoginView extends JDialog {
+
+private static final long serialVersionUID = 1L;
+	
+	private JButton btnLogin;
+	private JButton x;
+	
+	private final JPanel contentPanel = new JPanel();
+	private JTextField username;
+	private JPasswordField password;
+
+    public LoginView() {
+    	
+      setBounds(100, 100, 450, 300);
+      setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+      setUndecorated(true);
+      setLocationRelativeTo(null);
+      
+      getContentPane().setLayout(new BorderLayout());
+      contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+      getContentPane().add(contentPanel, BorderLayout.CENTER);
+      
+      x = new JButton();
+      x.setActionCommand("close");
+      x.setFont(new Font("Arial", Font.BOLD, 10));
+      x.setForeground(Color.RED);
+      x.setMargin(new Insets(0,0,0,0));
+      x.setBounds(5, 5, 30, 30); 
+      x.setContentAreaFilled(false);
+      x.setFocusPainted(false);
+      x.setText("X");
+      
+      contentPanel.add(x);
+      
+      contentPanel.setLayout(null);
+      {
+        JLabel lblUsername = new JLabel("Ime");
+        lblUsername.setBounds(89, 103, 63, 20);
+        contentPanel.add(lblUsername);
+      }
+      {
+        JLabel lblPassword = new JLabel("Šifra");
+        lblPassword.setBounds(89, 146, 63, 20);
+        contentPanel.add(lblPassword);
+      }
+      
+      username = new JTextField();
+      username.setBounds(173, 103, 152, 20);
+      contentPanel.add(username);
+      username.setColumns(10);
+      
+      password = new JPasswordField();
+      password.setBounds(173, 146, 152, 20);
+      contentPanel.add(password);
+      
+      btnLogin = new JButton("Prijava");
+   
+      btnLogin.setBounds(205, 192, 89, 23);
+      contentPanel.add(btnLogin);
+      
+      JLabel lblLogin = new JLabel("Prijava na sistem");
+      lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
+      lblLogin.setFont(new Font("Consolas", Font.PLAIN, 20));
+      lblLogin.setBounds(124, 50, 230, 23);
+      contentPanel.add(lblLogin);
+
+      setVisible(true);
+    }
+    
+    public void setActionListener(ActionListener actionListener) {
+    	btnLogin.addActionListener(actionListener);
+    	x.addActionListener(actionListener);
+    }
+
+	public JTextField getUsername() {
+		return username;
+	}
+
+	public void setUsername(JTextField username) {
+		this.username = username;
+	}
+
+	public JPasswordField getPassword() {
+		return password;
+	}
+
+	public void setPassword(JPasswordField password) {
+		this.password = password;
+	}
+
+}

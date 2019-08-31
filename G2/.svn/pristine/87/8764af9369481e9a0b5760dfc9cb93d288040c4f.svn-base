@@ -1,0 +1,36 @@
+package main;
+
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
+
+import javax.swing.JFrame;
+
+import controller.LoginController;
+import model.KorisnikModel;
+import model.WriteXMLtoFile;
+import view.LoginView;
+import view.StabloView;
+
+
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		/*DatabaseConnection connection = DatabaseConnection.getInstance();
+		System.out.println(connection.isConnectionOpen());
+		connection.closeConnection();*/
+		
+		/*TableXmlGenerator parser = new TableXmlGenerator();
+		System.out.println(parser.getTable("Clan","pisg2"));*/
+		
+		new LoginController(new LoginView()	, new KorisnikModel());
+		//new WriteXMLtoFile("pisg2");
+		
+		/*JFrame frame = new JFrame("Test");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(new StabloView());
+		frame.setSize(300, 300);
+		frame.setVisible(true);*/
+	}
+
+}

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Clanovi" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="68e0f8ca-8abb-49ca-8f85-a797a5167aaf">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<parameter name="ps_naziv" class="java.lang.String" evaluationTime="Early">
+		<parameterDescription><![CDATA[ps_naziv]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Multiteka"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM Clan]]>
+	</queryString>
+	<field name="Cl_ClanskiBroj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Cl_ClanskiBroj"/>
+	</field>
+	<field name="Cl_ImePrezime" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Cl_ImePrezime"/>
+	</field>
+	<field name="Cl_DatumUclanjenja" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Cl_DatumUclanjenja"/>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-30" y="-20" width="595" height="92" backcolor="#006699" uuid="9725ca67-a8f7-4e27-888b-ad3f7a2a37f5"/>
+				<staticText>
+					<reportElement x="450" y="50" width="125" height="20" forecolor="#FFFFFF" uuid="4b98ea00-e51a-4224-94e1-12b4fedc1bae"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Spisak članova]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="24" y="26" width="416" height="44" forecolor="#FFFFFF" uuid="53569e70-6146-4fe4-8557-dbbc4ab32497"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="26" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{ps_naziv}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="0b976295-22ea-44c7-8efd-e69ed2cbdc72"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="06d9c263-90dd-4e76-b79b-ed632fd5559d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9a42cc4d-f4ee-4568-b851-23560bdb1fb7"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Članski broj]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="185" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="9dfb2254-e2aa-44f4-b8b5-9a5e4c1862e9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="56c7427e-2aa9-4ffa-9cd1-de929d5ca078"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Član]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="370" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="7355c6d8-4d4d-4d53-b41c-4a817ae3e3fa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="52614c51-102e-4d91-b022-a855fb37a084"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datum učlanjenja]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="cbc80675-c099-4428-96b1-6a551fc3c569"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="185" height="20" uuid="027a9d69-2386-42e7-99c2-1968cd9b08c4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9a42cc4d-f4ee-4568-b851-23560bdb1fb7"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Cl_ClanskiBroj}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="185" y="0" width="185" height="20" uuid="97ce98e1-968b-4f3f-a263-bd6b47d99e90">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="56c7427e-2aa9-4ffa-9cd1-de929d5ca078"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Cl_ImePrezime}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="370" y="0" width="185" height="20" uuid="55d11f13-8d75-4b1b-a63e-a715bed3dab9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="52614c51-102e-4d91-b022-a855fb37a084"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Cl_DatumUclanjenja}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="66eaafd9-da0c-4899-a9be-8d1d828da3e9"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="84486ad1-1ad0-4cea-bd15-8fe870a8dee1"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="367923a9-9b5d-4d65-b8e7-5854047d0678"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,17 @@
+package main;
+
+import model.DatabaseConnection;
+import model.TableParser;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		/*DatabaseConnection connection = DatabaseConnection.getInstance();
+		System.out.println(connection.isConnectionOpen());
+		connection.closeConnection();*/
+		
+		TableParser parser = new TableParser();
+		parser.getTable("Korisnik");
+	}
+
+}

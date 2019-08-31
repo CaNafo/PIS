@@ -1,0 +1,26 @@
+package model;
+
+public final class Permissions {
+                                                                    
+	public static final int Kreiranje_multiteke = 1; //A                     
+	public static final int Kreiranje_institucije = 2; //A                  
+	public static final int Dodjela_menadzera_instituciji = 3;//A           
+	public static final int Brisanje_institucije = 4;//A  
+	public static final int Povratak_institucije = 5;//A  
+	public static final int Generisanje_izvjestaja_institucije = 6;//M,Š,R      
+	public static final int Generisanje_finansijskog_izvjestaja = 7;//M    
+	public static final int Izdavanje_gradje = 8;//Š,R    
+	public static final int Rezervisanje_gradje = 9;//Š,R      
+	public static final int Naplata = 10;//Š,R         
+	public static final int Pregled_dostupne_gradje = 11;//Š,R                  
+	public static final int Pregled_detalja_gradje = 12;//Š,R                   
+	public static final int Brisanje_gradje = 13;//Š             
+	public static final int Povratak_gradje = 14;//Š               
+	public static final int Promjena_pravila_gradje = 15;//Š                  
+	public static final int Rad_sa_kategorijama = 16;//Š                      
+	public static final int Rad_sa_zaposlenima = 17;//M                     
+	public static final int Rad_sa_clanovima = 18;//R   
+	public static final int Izmjena_detalja_gradje = 19;//Š   
+	
+	
+}

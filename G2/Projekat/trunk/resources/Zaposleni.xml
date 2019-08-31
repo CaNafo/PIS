@@ -1,0 +1,31 @@
+<table name="Zaposleni">
+<column name="Zaposleni_ID" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="Posao_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="ZAP_Ime i prezime" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" length="100" />
+<column name="ZAP_email" data_type="VARCHAR" null="YES" autoincrement="NO" isName="false" length="100" />
+<column name="ZAP_Br telefona" data_type="VARCHAR" null="YES" autoincrement="NO" isName="false" length="30" />
+<column name="ZAP_Plata" data_type="DECIMAL" null="NO" autoincrement="NO" isName="false" />
+<column name="ZAP_Koeficijent" data_type="DECIMAL" null="NO" autoincrement="NO" isName="false" />
+<column name="ZAP_Dani odstustva" data_type="INTEGER" null="YES" autoincrement="NO" isName="false" />
+<pk name="PK_ZAPOSLENI">
+<column name="Zaposleni_ID" />
+</pk>
+<fk name="FK_Obavlja" parent_table="Posao" >
+<column parent_name="POS_ID" child_name="Posao_ID" />
+</fk>
+<reference table_name="Hijerarhija zaposlenih">
+<column name="Zaposleni_ID" />
+</reference>
+<reference table_name="Hijerarhija zaposlenih">
+<column name="Zaposleni_ID" />
+</reference>
+<reference table_name="Istorija zaposlenja">
+<column name="Zaposleni_ID" />
+</reference>
+<reference table_name="Kvalifikacije radnika">
+<column name="Zaposleni_ID" />
+</reference>
+<reference table_name="Usluga">
+<column name="Zaposleni_ID" />
+</reference>
+</table>

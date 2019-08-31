@@ -1,0 +1,17 @@
+<table name="Hijerarhija zaposlenih">
+<column name="HZ_ID" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="Nadredjeni_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="Podredjeni_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="HZ_Naziv odnosa" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" length="30" />
+<pk name="PK_HIJERARHIJA ZAPOSLENIH">
+<column name="Nadredjeni_ID" />
+<column name="Podredjeni_ID" />
+<column name="HZ_ID" />
+</pk>
+<fk name="FK_Nadredjeni" parent_table="Zaposleni" >
+<column parent_name="Zaposleni_ID" child_name="Podredjeni_ID" />
+</fk>
+<fk name="FK_Podredjeni" parent_table="Zaposleni" >
+<column parent_name="Zaposleni_ID" child_name="Nadredjeni_ID" />
+</fk>
+</table>

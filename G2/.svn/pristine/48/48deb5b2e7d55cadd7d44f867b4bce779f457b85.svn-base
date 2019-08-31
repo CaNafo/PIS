@@ -1,0 +1,16 @@
+package model;
+
+public class TableFormModel {
+	
+	private TableDataModel tableDataModel;
+	
+	public TableFormModel(String tableName) {
+		TableXmlParser parser=new TableXmlParser();
+		this.tableDataModel=parser.getTable(tableName);
+		tableDataModel.fetchData();
+	}
+	
+	public TableDataModel getTableDataModel() {
+		return tableDataModel;
+	}
+}

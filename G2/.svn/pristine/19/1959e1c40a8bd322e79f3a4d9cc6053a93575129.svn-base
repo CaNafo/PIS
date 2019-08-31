@@ -1,0 +1,10 @@
+<table name="Dozvola">
+<column name="DOZ_ID" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="DOZ_Naziv" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" />
+<pk name="PK_DOZVOLA">
+<column name="DOZ_ID" />
+</pk>
+<reference table_name="Lista dozvola">
+<column name="DOZ_ID" />
+</reference>
+</table>

@@ -1,0 +1,71 @@
+<table name="DRZAVA">
+<column name="DR_oznaka" data_type="CHAR" null="NO" autoincrement="NO" isName="false" length="3" />
+<column name="Drzavno uredjenje" data_type="CHAR" null="YES" autoincrement="NO" isName="false" length="2" />
+<column name="Pravni nasljednik" data_type="CHAR" null="YES" autoincrement="NO" isName="false" length="3" />
+<column name="Glavni grad" data_type="INTEGER" null="YES" autoincrement="NO" isName="false" />
+<column name="DR_naziv" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" length="80" />
+<column name="DR_grb" data_type="LONGVARBINARY" null="YES" autoincrement="NO" isName="false" />
+<column name="DR_zastava" data_type="LONGVARBINARY" null="YES" autoincrement="NO" isName="false" />
+<pk name="PK_DRZAVA">
+<column name="DR_oznaka" />
+</pk>
+<fk name="FK_PRAVNI_NASLJEDNIK" parent_table="DRZAVA" >
+<column parent_name="DR_oznaka" child_name="Pravni nasljednik" />
+</fk>
+<fk name="FK_TEKUCE_URE_ENJE" parent_table="DRZAVNO_UREDJENJE" >
+<column parent_name="DU_oznaka" child_name="Drzavno uredjenje" />
+</fk>
+<fk name="FK_GLAVNI_GRAD" parent_table="NASELJENO_MJESTO" >
+<column parent_name="DR_oznaka" child_name="DR_oznaka" />
+<column parent_name="NM_oznaka" child_name="Glavni grad" />
+</fk>
+<reference table_name="ISTORIJA_UREDJENJA">
+<column name="DR_oznaka" />
+</reference>
+<reference table_name="NASELJA_U_REGIONU">
+<column name="DR_oznaka" />
+<column name="NM_oznaka" />
+</reference>
+<reference table_name="NASELJENO_MJESTO">
+<column name="DR_oznaka" />
+</reference>
+<reference table_name="OPSTINA">
+<column name="DR_oznaka" />
+</reference>
+<reference table_name="OPSTINA">
+<column name="DR_oznaka" />
+<column name="NM_oznaka" />
+</reference>
+<reference table_name="ORGANIZACIONA_JEDINICA">
+<column name="DR_oznaka" />
+<column name="NM_oznaka" />
+</reference>
+<reference table_name="POSLOVNI_SISTEM">
+<column name="DR_oznaka" />
+</reference>
+<reference table_name="POSLOVNI_SISTEM">
+<column name="DR_oznaka" />
+<column name="NM_oznaka" />
+</reference>
+<reference table_name="REGION">
+<column name="DR_oznaka" />
+</reference>
+<reference table_name="REGION">
+<column name="DR_oznaka" />
+<column name="NM_oznaka" />
+</reference>
+<reference table_name="SASTAV_DRZAVE">
+<column name="DR_oznaka" />
+</reference>
+<reference table_name="SASTAV_DRZAVE">
+<column name="DR_oznaka" />
+</reference>
+<reference table_name="SASTAV_NASELJA">
+<column name="DR_oznaka" />
+<column name="NM_oznaka" />
+</reference>
+<reference table_name="SASTAV_NASELJA">
+<column name="DR_oznaka" />
+<column name="OP_oznaka" />
+</reference>
+</table>

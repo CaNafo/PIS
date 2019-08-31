@@ -1,0 +1,33 @@
+<table name="KonkretnaGradja">
+<column name="KG_ID" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="TG_ID" data_type="INTEGER" null="YES" autoincrement="NO" isName="false" />
+<column name="PS_Tip_oznaka" data_type="CHAR" null="YES" autoincrement="NO" isName="false" length="2" />
+<column name="OJ_Tip_oznaka" data_type="CHAR" null="YES" autoincrement="NO" isName="false" length="2" />
+<column name="Poslovni_sistem_ID" data_type="INTEGER" null="YES" autoincrement="NO" isName="false" />
+<column name="Drzava_oznaka" data_type="CHAR" null="YES" autoincrement="NO" isName="false" length="3" />
+<column name="Organizaciona_jedinica_ID" data_type="INTEGER" null="YES" autoincrement="NO" isName="false" />
+<column name="GR_ID" data_type="INTEGER" null="YES" autoincrement="NO" isName="false" />
+<column name="KG_KataloskiBroj" data_type="VARCHAR" null="NO" autoincrement="NO" isName="false" length="32" />
+<column name="KG_Naziv" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" length="80" />
+<column name="KG_Izdato" data_type="BIT" null="NO" autoincrement="NO" isName="false" />
+<column name="KG_Rezervisano" data_type="BIT" null="NO" autoincrement="NO" isName="false" />
+<column name="KG_Obrisano" data_type="BIT" null="NO" autoincrement="NO" isName="false" />
+<pk name="PK_KONKRETNAGRADJA">
+<column name="KG_ID" />
+</pk>
+<fk name="FK_Gradja" parent_table="Gradja" >
+<column parent_name="TG_ID" child_name="TG_ID" />
+<column parent_name="PS_Tip_oznaka" child_name="PS_Tip_oznaka" />
+<column parent_name="OJ_Tip_oznaka" child_name="OJ_Tip_oznaka" />
+<column parent_name="Poslovni_sistem_ID" child_name="Poslovni_sistem_ID" />
+<column parent_name="Drzava_oznaka" child_name="Drzava_oznaka" />
+<column parent_name="Organizaciona_jedinica_ID" child_name="Organizaciona_jedinica_ID" />
+<column parent_name="GR_ID" child_name="GR_ID" />
+</fk>
+<reference table_name="Istorija izdavanja">
+<column name="KG_ID" />
+</reference>
+<reference table_name="RezervisaniMaterijal">
+<column name="KG_ID" />
+</reference>
+</table>

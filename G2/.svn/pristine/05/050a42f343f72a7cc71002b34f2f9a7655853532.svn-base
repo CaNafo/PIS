@@ -1,0 +1,22 @@
+package main;
+
+import application.MainVindow;
+import helpers.DodavanjeDozvola;
+import view.LoginView;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+
+//		new MainVindow();
+		new LoginView();
+
+//		new RezervisiIzdajGradjuView(2);
+
+//		new WriteXMLtoFile("pisg2");
+
+//		new DodavanjeDozvola(true);
+		
+	}
+
+}

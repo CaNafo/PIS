@@ -1,0 +1,15 @@
+<table name="Set Atributa">
+<column name="SA_ID" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="TG_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="TA_ID" data_type="INTEGER" null="YES" autoincrement="NO" isName="false" />
+<pk name="PK_SET ATRIBUTA">
+<column name="TG_ID" />
+<column name="SA_ID" />
+</pk>
+<fk name="FK_Ukljucuje atribut" parent_table="TipAtributa" >
+<column parent_name="TA_ID" child_name="TA_ID" />
+</fk>
+<fk name="FK_Vazi za gradju" parent_table="TipGradje" >
+<column parent_name="TG_ID" child_name="TG_ID" />
+</fk>
+</table>

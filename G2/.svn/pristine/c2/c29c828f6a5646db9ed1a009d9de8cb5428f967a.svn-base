@@ -1,0 +1,51 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.util.Vector;
+
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+
+import model.TableDataModel;
+import model.TableFormModel;
+
+@SuppressWarnings("serial")
+public class TableView extends JPanel {
+
+	private TableFormModel model;
+
+	public TableView(TableFormModel model) {
+		setLayout(new BorderLayout());
+		this.model = model;
+		TableDataModel dataModel = model.getTableDataModel();
+
+		// Naslov
+		JLabel title = new JLabel(dataModel.getName());
+		title.setHorizontalAlignment(SwingConstants.CENTER);
+		Font titleFont = new Font("Arial", Font.ITALIC | Font.BOLD, 36);
+		title.setFont(titleFont);
+		add(title, BorderLayout.NORTH);
+
+		// Tabela
+		Vector<String> columnNames = new Vector<>();
+		for (int i = 0; i < dataModel.getColumnCount(); i++)
+			columnNames.add(dataModel.getColumns().get(i).getName());
+		JTable mainTable = new JTable(dataModel.getData(), dataModel.getColumnDisplayNames());
+		mainTable.setName(model.getTableDataModel().getName());
+		mainTable.setOpaque(false);
+
+		JScrollPane scrollPane = new JScrollPane(mainTable);
+		add(scrollPane, BorderLayout.CENTER);
+
+		setVisible(true);
+	}
+
+}

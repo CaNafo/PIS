@@ -1,0 +1,18 @@
+<table name="Istorija zaposlenja">
+<column name="IZ_ID" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="POS_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="Zaposleni_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="IZ_Datum zaposlenja" data_type="DATE" null="NO" autoincrement="NO" isName="false" />
+<column name="IZ_Datum prestanka radnog odnosa" data_type="DATE" null="YES" autoincrement="NO" isName="false" />
+<pk name="PK_ISTORIJA ZAPOSLENJA">
+<column name="POS_ID" />
+<column name="Zaposleni_ID" />
+<column name="IZ_ID" />
+</pk>
+<fk name="FK_Radi" parent_table="Posao" >
+<column parent_name="POS_ID" child_name="POS_ID" />
+</fk>
+<fk name="FK_Radnik" parent_table="Zaposleni" >
+<column parent_name="Zaposleni_ID" child_name="Zaposleni_ID" />
+</fk>
+</table>

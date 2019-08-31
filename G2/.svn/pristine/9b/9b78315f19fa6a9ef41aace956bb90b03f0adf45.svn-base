@@ -1,0 +1,30 @@
+package model;
+
+import java.util.ArrayList;
+
+public class Table {
+	private ArrayList<TableColumn> columns;
+	private TableKey primaryKey;
+	private ArrayList<TableKey> foreignKeys;
+	
+	public Table(ArrayList<TableColumn> columns, TableKey primaryKey, ArrayList<TableKey> foreignKeys) {
+		super();
+		this.columns = columns;
+		this.primaryKey = primaryKey;
+		this.foreignKeys = foreignKeys;
+	}
+
+	public ArrayList<TableColumn> getColumns() {
+		return columns;
+	}
+
+	public TableKey getPrimaryKey() {
+		return primaryKey;
+	}
+
+	public ArrayList<TableKey> getForeignKeys() {
+		return foreignKeys;
+	}
+	
+	
+}

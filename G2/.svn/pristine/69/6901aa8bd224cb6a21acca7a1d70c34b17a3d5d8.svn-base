@@ -1,0 +1,13 @@
+<table name="NASELJENO_MJESTO">
+<column name="NM_oznaka" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="DR_oznaka" data_type="CHAR" null="NO" autoincrement="NO" isName="false" length="3" />
+<column name="NM_naziv" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" length="40" />
+<column name="NM_PTT" data_type="VARCHAR" null="YES" autoincrement="NO" isName="false" length="12" />
+<pk name="PK_NASELJENO_MJESTO">
+<column name="DR_oznaka" />
+<column name="NM_oznaka" />
+</pk>
+<fk name="FK_MASELJA_U_DRZAVI" parent_table="DRZAVA" >
+<column parent_name="DR_oznaka" child_name="DR_oznaka" />
+</fk>
+</table>

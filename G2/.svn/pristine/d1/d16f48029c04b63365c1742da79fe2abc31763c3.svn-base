@@ -1,0 +1,118 @@
+package view;
+
+import java.awt.Event;
+import java.awt.Menu;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
+
+import com.sun.glass.events.KeyEvent;
+
+import controller.MenuBarController;
+
+@SuppressWarnings("serial")
+public class MenuBarView extends JMenuBar {
+	private JMenuItem showLogs;
+	private JMenuItem itemExit;
+	private JMenuItem refresh;
+	
+	private JMenuItem clanoviReport;
+	private JMenuItem fininsijskaKarticaReport;
+	private JMenuItem stanjeGradjeReport;
+	private JMenuItem istorijaIzdavanjaReport;
+
+	private JMenuItem dodavanjeDozvola;
+	private JMenuItem dodavanjeUloga;
+	
+	private JMenuItem oNama;
+	
+	public MenuBarView() {
+		
+
+		JMenu menuApp= new JMenu("Program");
+		this.add(menuApp);
+				
+
+		showLogs = new JMenuItem("Prikaži prijave",new ImageIcon("icons/logs.png"));
+		showLogs .setActionCommand("showLogs");
+		menuApp.add(showLogs);
+		showLogs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, Event.CTRL_MASK));
+		menuApp.addSeparator();
+		
+		refresh = new JMenuItem("Osvježi",new ImageIcon("icons/refresh-small.png"));
+		refresh.setActionCommand("refresh");
+		refresh.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
+		menuApp.add(refresh);
+
+		menuApp.addSeparator();
+		
+		itemExit = new JMenuItem("Kraj",new ImageIcon("icons/cross.png"));
+		itemExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, Event.CTRL_MASK));
+		itemExit.setActionCommand("exitApplication");
+		menuApp.add(itemExit);
+		
+
+		JMenu menuReports= new JMenu("Izvještaji");
+		this.add(menuReports);
+		
+		clanoviReport = new JMenuItem("Izvještaj o èlanovima",new ImageIcon("icons/report.png"));
+		clanoviReport.setActionCommand("clanoviReport");
+		menuReports.add(clanoviReport);
+		
+		fininsijskaKarticaReport = new JMenuItem("Izvještaj finansijske kartice",new ImageIcon("icons/report.png"));
+		fininsijskaKarticaReport.setActionCommand("finansijskaKarticaReport");
+		menuReports.add(fininsijskaKarticaReport);
+		
+		stanjeGradjeReport = new JMenuItem("Izvještaj stanja graðe",new ImageIcon("icons/report.png"));
+		stanjeGradjeReport.setActionCommand("stanjeGradjeReport");
+		menuReports.add(stanjeGradjeReport);
+		
+		istorijaIzdavanjaReport = new JMenuItem("Izvještaj o istoriji izdavanja",new ImageIcon("icons/report.png"));
+		istorijaIzdavanjaReport.setActionCommand("istorijaIzdavanjaReport");
+		menuReports.add(istorijaIzdavanjaReport);
+		
+		
+		JMenu menuDozvole= new JMenu("Dozvole");
+		this.add(menuDozvole);
+		
+		dodavanjeDozvola = new JMenuItem("Dodaj dozvolu",new ImageIcon("icons/perm.png"));
+		dodavanjeDozvola.setActionCommand("addPermission");		
+		menuDozvole.add(dodavanjeDozvola);
+		
+		dodavanjeUloga = new JMenuItem("Dodaj ulogu",new ImageIcon("icons/role.png"));
+		dodavanjeUloga.setActionCommand("addRole");
+		menuDozvole.add(dodavanjeUloga);
+		
+		
+		JMenu menuAbout = new JMenu("About");
+		this.add(menuAbout);
+		
+		oNama = new JMenuItem("O nama",new ImageIcon("icons/about.png"));
+		oNama.setActionCommand("aboutUs");
+		menuAbout.add(oNama);
+
+		new MenuBarController(this);
+		
+	}
+	
+	public void addActionListeners(ActionListener actionListener) {
+		showLogs.addActionListener(actionListener);
+		itemExit.addActionListener(actionListener);
+		clanoviReport.addActionListener(actionListener);           
+		fininsijskaKarticaReport.addActionListener(actionListener);
+		stanjeGradjeReport.addActionListener(actionListener);
+		istorijaIzdavanjaReport.addActionListener(actionListener);
+		dodavanjeDozvola.addActionListener(actionListener);
+		refresh.addActionListener(actionListener);
+		dodavanjeUloga.addActionListener(actionListener);
+		oNama.addActionListener(actionListener);
+	}
+}

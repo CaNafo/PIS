@@ -1,0 +1,13 @@
+package main;
+
+import model.DatabaseConnection;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		DatabaseConnection connection = DatabaseConnection.getInstance();
+		System.out.println(connection.isConnectionOpen());
+		connection.closeConnection();
+	}
+
+}

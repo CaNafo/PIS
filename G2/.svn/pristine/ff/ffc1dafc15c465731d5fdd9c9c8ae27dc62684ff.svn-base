@@ -1,0 +1,52 @@
+package controller;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.swing.JOptionPane;
+
+import helpers.DatabaseConnection;
+import model.TableFormModel;
+import view.TableToolbar;
+
+public class TableToolbarController implements ActionListener {
+
+	private TableFormModel model;
+	private TableToolbar view;
+
+	public TableToolbarController(TableFormModel model, TableToolbar view) {
+		this.model = model;
+		this.view = view;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		switch (e.getActionCommand()) {
+		case "insert":
+
+			break;
+		case "update":
+
+			break;
+		case "delete":
+			try {
+				model.getTableDataModel().deleteEntry();
+			} catch (NullPointerException e1) {
+				String message = "Molimo vas izaberite red koji želite brisati ili mijenjati.";
+				JOptionPane.showMessageDialog(view, message, "Red nije izabran", JOptionPane.INFORMATION_MESSAGE);
+			} catch (SQLException e2) {
+				String warningMessage = "Nije moguæe obrisati unos.\nRazlog je vjerovatno taj što se dati unos koristi u drugim tabelama.";
+				JOptionPane.showMessageDialog(view, warningMessage, "Brisanje nije moguæe",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+			break;
+		case "refresh":
+
+			break;
+		}
+	}
+
+}

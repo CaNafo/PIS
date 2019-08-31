@@ -1,0 +1,18 @@
+<table name="SASTAV_NASELJA">
+<column name="Drzava" data_type="CHAR" null="NO" autoincrement="NO" isName="false" />
+<column name="Naseljeno mjesto" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="Opstina" data_type="NUMERIC" null="NO" autoincrement="NO" isName="false" />
+<pk name="PK_SASTAV_NASELJA">
+<column name="Drzava" />
+<column name="Naseljeno mjesto" />
+<column name="Opstina" />
+</pk>
+<fk name="FK_SASTAV_NASELJA" parent_table="NASELJENO_MJESTO" >
+<column parent_name="DR_oznaka" child_name="Drzava" />
+<column parent_name="NM_oznaka" child_name="Naseljeno mjesto" />
+</fk>
+<fk name="FK_SASTAV_NASELJA2" parent_table="OPSTINA" >
+<column parent_name="DR_oznaka" child_name="Drzava" />
+<column parent_name="OP_oznaka" child_name="Opstina" />
+</fk>
+</table>

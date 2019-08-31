@@ -1,0 +1,30 @@
+<table name="POVEZANI_SISTEMI">
+<column name="Tip_sistema1" data_type="CHAR" null="NO" autoincrement="NO" isName="false" />
+<column name="ID_Sistema1" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="Oznaka_drzave1" data_type="CHAR" null="NO" autoincrement="NO" isName="false" />
+<column name="Tip_sistema2" data_type="CHAR" null="NO" autoincrement="NO" isName="false" />
+<column name="ID_Sistema2" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="Oznaka_drzave2" data_type="CHAR" null="NO" autoincrement="NO" isName="false" />
+<pk name="PK_POVEZANI_SISTEMI">
+<column name="Tip_sistema1" />
+<column name="ID_Sistema1" />
+<column name="Oznaka_drzave1" />
+<column name="Tip_sistema2" />
+<column name="ID_Sistema2" />
+<column name="Oznaka_drzave2" />
+</pk>
+<fk name="FK_POVEZANI_SISTEMI" parent_table="POSLOVNI_SISTEM" >
+<column parent_name="TPS_OZNAKA" child_name="Tip_sistema1" />
+</fk>
+<fk name="FK_POVEZANI_SISTEMI2" parent_table="POSLOVNI_SISTEM" >
+<column parent_name="TPS_OZNAKA" child_name="Tip_sistema2" />
+<column parent_name="PS_IDENTIFIKATOR" child_name="ID_Sistema2" />
+</fk>
+<fk name="FK_POVEZANI_SISTEMI" parent_table="POSLOVNI_SISTEM" >
+<column parent_name="PS_IDENTIFIKATOR" child_name="ID_Sistema1" />
+<column parent_name="Drzava_oznaka" child_name="Oznaka_drzave1" />
+</fk>
+<fk name="FK_POVEZANI_SISTEMI2" parent_table="POSLOVNI_SISTEM" >
+<column parent_name="Drzava_oznaka" child_name="Oznaka_drzave2" />
+</fk>
+</table>

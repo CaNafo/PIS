@@ -1,0 +1,30 @@
+package main;
+
+import java.awt.Dimension;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
+import javax.swing.JFrame;
+import javax.swing.JTable;
+
+import model.TableDataModel;
+import model.TableFormModel;
+import model.TableXmlParser;
+import view.TableView;
+
+public class TestB {
+	public static void main(String[] args) {
+		JFrame mainframe = new JFrame("Test");
+		mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainframe.setSize(1366, 768);
+		TableView tableView = new TableView(new TableFormModel("clan"));
+		mainframe.add(tableView);
+		mainframe.setVisible(true);
+		
+//		TableXmlParser parser = new TableXmlParser();
+//		TableDataModel table = parser.getTable("ORGANIZACIONA_JEDINICA");
+//		System.out.println(table);
+	}
+
+}

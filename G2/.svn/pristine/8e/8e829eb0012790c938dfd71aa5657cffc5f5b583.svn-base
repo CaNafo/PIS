@@ -1,0 +1,16 @@
+<table name="Lista dozvola">
+<column name="LD_ID" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="DOZ_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="UL_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<pk name="PK_LISTA DOZVOLA">
+<column name="LD_ID" />
+<column name="DOZ_ID" />
+<column name="UL_ID" />
+</pk>
+<fk name="FK_Sadrzi dozvolu" parent_table="Dozvola" >
+<column parent_name="DOZ_ID" child_name="DOZ_ID" />
+</fk>
+<fk name="FK_Vazi za ulogu" parent_table="Uloga" >
+<column parent_name="UL_ID" child_name="UL_ID" />
+</fk>
+</table>

@@ -1,0 +1,43 @@
+<table name="Istorija izdavanja">
+<column name="II_ID" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="ORG_PS_Tip_oznaka" data_type="CHAR" null="NO" autoincrement="NO" isName="false" length="2" />
+<column name="OJ_Tip_oznaka" data_type="CHAR" null="NO" autoincrement="NO" isName="false" length="2" />
+<column name="Poslovni_sistem_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="Drzava_oznaka" data_type="CHAR" null="NO" autoincrement="NO" isName="false" length="3" />
+<column name="Organizaciona_jedinica_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="TC_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="Cl_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="Konkretna_gradja_ID" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="II_Datum izdavanja" data_type="DATE" null="NO" autoincrement="NO" isName="false" />
+<column name="II_Datum_vracanja" data_type="DATE" null="YES" autoincrement="NO" isName="false" />
+<column name="II_Placeno" data_type="BIT" null="NO" autoincrement="NO" isName="false" />
+<pk name="PK_ISTORIJA IZDAVANJA">
+<column name="ORG_PS_Tip_oznaka" />
+<column name="OJ_Tip_oznaka" />
+<column name="Poslovni_sistem_ID" />
+<column name="Drzava_oznaka" />
+<column name="Organizaciona_jedinica_ID" />
+<column name="TC_ID" />
+<column name="Cl_ID" />
+<column name="II_ID" />
+</pk>
+<fk name="FK_Istorija clana" parent_table="Clan" >
+<column parent_name="OJ_Tip_oznaka" child_name="OJ_Tip_oznaka" />
+<column parent_name="Poslovni_sistem_ID" child_name="Poslovni_sistem_ID" />
+<column parent_name="Drzava_oznaka" child_name="Drzava_oznaka" />
+<column parent_name="Organizaciona_jedinica_ID" child_name="Organizaciona_jedinica_ID" />
+<column parent_name="TC_ID" child_name="TC_ID" />
+<column parent_name="ORG_PS_Tip_oznaka" child_name="ORG_PS_Tip_oznaka" />
+<column parent_name="Cl_ID" child_name="Cl_ID" />
+</fk>
+<fk name="FK_Izdavana gradja" parent_table="KonkretnaGradja" >
+<column parent_name="KG_ID" child_name="Konkretna_gradja_ID" />
+</fk>
+<fk name="FK_Istorija institucije" parent_table="ORGANIZACIONA_JEDINICA" >
+<column parent_name="PS_Tip_oznaka" child_name="ORG_PS_Tip_oznaka" />
+<column parent_name="OJ_Tip_oznaka" child_name="OJ_Tip_oznaka" />
+<column parent_name="Poslovni_sistem_ID" child_name="Poslovni_sistem_ID" />
+<column parent_name="Drzava_oznaka" child_name="Drzava_oznaka" />
+<column parent_name="Organizaciona_jedinica_ID" child_name="Organizaciona_jedinica_ID" />
+</fk>
+</table>

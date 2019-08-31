@@ -1,0 +1,24 @@
+<table name="Korisnik">
+<column name="KOR_ID" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="PS_Tip_oznaka" data_type="CHAR" null="YES" autoincrement="NO" isName="false" />
+<column name="OJ_Tip_oznaka" data_type="CHAR" null="YES" autoincrement="NO" isName="false" />
+<column name="Poslovni_sistem_ID" data_type="INTEGER" null="YES" autoincrement="NO" isName="false" />
+<column name="Drzava_oznaka" data_type="CHAR" null="YES" autoincrement="NO" isName="false" />
+<column name="Organizaciona_jedinica_ID" data_type="INTEGER" null="YES" autoincrement="NO" isName="false" />
+<column name="KOR_LOZINKA" data_type="VARCHAR" null="NO" autoincrement="NO" isName="false" />
+<column name="KOR_email" data_type="VARCHAR" null="YES" autoincrement="NO" isName="false" />
+<column name="KOR_KorisnickoIme" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" />
+<pk name="PK_KORISNIK">
+<column name="KOR_ID" />
+</pk>
+<fk name="FK_Korisnik institucije" parent_table="ORGANIZACIONA_JEDINICA" >
+<column parent_name="PS_Tip_oznaka" child_name="PS_Tip_oznaka" />
+<column parent_name="OJ_Tip_oznaka" child_name="OJ_Tip_oznaka" />
+<column parent_name="Poslovni_sistem_ID" child_name="Poslovni_sistem_ID" />
+<column parent_name="Drzava_oznaka" child_name="Drzava_oznaka" />
+<column parent_name="Organizaciona_jedinica_ID" child_name="Organizaciona_jedinica_ID" />
+</fk>
+<reference table_name="Lista Uloga">
+<column name="KOR_ID" />
+</reference>
+</table>

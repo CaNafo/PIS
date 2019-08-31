@@ -1,0 +1,14 @@
+<table name="SASTAV_DRZAVE">
+<column name="DRZ_DR_oznaka" data_type="CHAR" null="NO" autoincrement="NO" isName="false" />
+<column name="DR_oznaka" data_type="CHAR" null="NO" autoincrement="NO" isName="false" />
+<pk name="PK_SASTAV_DRZAVE">
+<column name="DRZ_DR_oznaka" />
+<column name="DR_oznaka" />
+</pk>
+<fk name="FK_SASTAV_DRZAVE" parent_table="DRZAVA" >
+<column parent_name="DR_oznaka" child_name="DRZ_DR_oznaka" />
+</fk>
+<fk name="FK_SASTAV_DRZAVE2" parent_table="DRZAVA" >
+<column parent_name="DR_oznaka" child_name="DR_oznaka" />
+</fk>
+</table>

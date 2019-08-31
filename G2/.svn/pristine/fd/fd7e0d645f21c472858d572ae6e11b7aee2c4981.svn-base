@@ -1,0 +1,36 @@
+package main;
+
+import java.awt.Dimension;
+
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+
+import application.MainVindow;
+import controller.DetaljiGradjeController;
+import controller.RezervisiIzdajGradjuController;
+import controller.SearchGradjaController;
+import helpers.TableXmlGenerator;
+import helpers.WriteXMLtoFile;
+import model.TableDataModel;
+import model.TableFormModel;
+import view.DetaljiGradjeView;
+import view.LoginView;
+import view.LogsView;
+import view.RezervisiIzdajGradjuView;
+import view.SearchView;
+import view.TableView;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+
+//		new MainVindow();
+//		new LoginView();
+
+		new RezervisiIzdajGradjuView(2);
+
+//		new WriteXMLtoFile("pisg2");
+
+	}
+
+}

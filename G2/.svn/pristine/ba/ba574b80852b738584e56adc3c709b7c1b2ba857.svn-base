@@ -1,0 +1,30 @@
+package view;
+
+import java.util.Vector;
+
+import javax.swing.JPanel;
+
+import helpers.NameValuePair;
+
+@SuppressWarnings("serial")
+public class ForeignKeyField extends JPanel implements TableFieldInterface{
+
+	@Override
+	public Vector<NameValuePair> getValues() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean isNullable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

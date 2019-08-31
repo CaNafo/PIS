@@ -1,0 +1,16 @@
+<table name="Posao">
+<column name="POS_ID" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="POS_Naziv" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" />
+<column name="POS_Min plata" data_type="DECIMAL" null="YES" autoincrement="NO" isName="false" />
+<column name="POS_Max plata" data_type="DECIMAL" null="YES" autoincrement="NO" isName="false" />
+<column name="POS_Br dana godisnjeg odmora" data_type="INTEGER" null="YES" autoincrement="NO" isName="false" />
+<pk name="PK_POSAO">
+<column name="POS_ID" />
+</pk>
+<reference table_name="Istorija zaposlenja">
+<column name="POS_ID" />
+</reference>
+<reference table_name="Zaposleni">
+<column name="POS_ID" />
+</reference>
+</table>

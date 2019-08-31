@@ -1,0 +1,84 @@
+package main;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.nio.file.Files;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import com.sun.glass.ui.TouchInputSupport;
+
+import controller.TableSelectionController;
+import helpers.DatabaseConnection;
+import helpers.TableXmlParser;
+import model.TableDataModel;
+import model.TableFormModel;
+import view.InsertUpdateView;
+import view.TableToolbar;
+import view.TableView;
+
+public class TestB {
+	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JFrame mainframe = new JFrame("Test");
+		mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainframe.setSize(1366, 768);
+		mainframe.setLayout(new BorderLayout());
+
+		TableFormModel model;
+		model = new TableFormModel("istorija_uredjenja");
+		model = new TableFormModel("opstina");
+		model = new TableFormModel("organizaciona_jedinica");
+		model = new TableFormModel("clan");
+		model = new TableFormModel("drzavno_uredjenje");
+		model = new TableFormModel("drzava");
+		model = new TableFormModel("naseljeno_mjesto");
+		model = new TableFormModel("gradja");
+		model = new TableFormModel("konkretnagradja");
+		model = new TableFormModel("strucna sprema");
+
+
+		TableView view = new TableView(model);
+		mainframe.add(view, BorderLayout.CENTER);
+
+		TableToolbar toolbar = new TableToolbar(model);
+		toolbar.setFloatable(false);
+		mainframe.add(toolbar, BorderLayout.NORTH);
+		mainframe.setVisible(true);
+//		TestB.getObject();
+	}
+
+	public static void getObject() {
+		Long start = System.currentTimeMillis();
+		File dir = new File("resources");
+		File[] files = dir.listFiles();
+
+		Vector<TableDataModel> tables = new Vector<>();
+		TableXmlParser parser = new TableXmlParser();
+		for (File f : files) {
+			System.out.println(f.getName().replaceAll(".xml", ""));
+			TableDataModel model = parser.getTable(f.getName().replaceAll(".xml", ""));
+			model.fetchData();
+			tables.add(model);
+//			break;
+		}
+		System.out.println(System.currentTimeMillis() - start);
+	}
+
+}

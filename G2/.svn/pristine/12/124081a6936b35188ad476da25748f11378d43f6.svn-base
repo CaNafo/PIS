@@ -1,0 +1,145 @@
+package model;
+
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Vector;
+
+import com.microsoft.sqlserver.jdbc.SQLServerResultSet;
+
+public class KorisnikModel {
+	
+	private int ID;
+	private String korisnickoIme;
+	private String email;
+	private Vector<Integer> listaDozvola = new Vector<>();
+	
+	public String passwordHash(String password) {
+		
+			String passwordToHash = password;
+	        String generatedPassword = null;
+	        
+	        try {
+	            // Create MessageDigest instance for MD5
+	            MessageDigest md = MessageDigest.getInstance("MD5");
+	            //Add password bytes to digest
+	            md.update(passwordToHash.getBytes());
+	            //Get the hash's bytes
+	            byte[] bytes = md.digest();
+	            //This bytes[] has bytes in decimal format;
+	            //Convert it to hexadecimal format
+	            StringBuilder sb = new StringBuilder();
+	            for(int i=0; i< bytes.length ;i++)
+	            {
+	                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+	            }
+	            //Get complete hashed password in hex format
+	            generatedPassword = sb.toString();
+	        }
+	        catch (NoSuchAlgorithmException e)
+	        {
+	            e.printStackTrace();
+	        }
+		
+		return generatedPassword;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+	public void setID(int iD) {
+		ID = iD;
+	}
+	public String getKorisnickoIme() {
+		return korisnickoIme;
+	}
+	public void setKorisnickoIme(String korisnickoIme) {
+		this.korisnickoIme = korisnickoIme;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public Vector<Integer> getListaDozvola() {
+		return listaDozvola;
+	}
+	public void setListaDozvola(Vector<Integer> listaDozvola) {
+		this.listaDozvola = listaDozvola;
+	}
+	
+	public Vector<Integer> getListaDozvola(int ID){
+		DatabaseConnection conn = DatabaseConnection.getInstance();
+		Statement stmt;
+		
+		Vector<Integer>listaDozvola = new Vector<>();
+		Vector<Integer>listaUloga = new Vector<>();
+		try {
+			stmt = conn.getDbConnection().createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM [Lista Uloga] WHERE [KOR_ID]='"+ID+"'");
+			
+			while (rs.next()) {
+				listaUloga.add(rs.getInt("UL_ID"));
+			}
+			
+			for(int i=0; i<listaUloga.size();i++) {
+				rs = stmt.executeQuery("SELECT * FROM [Lista dozvola] WHERE [UL_ID]='"+listaUloga.get(i)+"'");
+				
+				while (rs.next()) {
+					listaDozvola.add(rs.getInt("DOZ_ID"));
+				}
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return listaDozvola;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void insertLog(int ID) {
+		DatabaseConnection conn = DatabaseConnection.getInstance();
+		
+		LocalDateTime now = LocalDateTime.now();
+		int hour = now.getHour();
+		int minute = now.getMinute();
+		int second = now.getSecond();
+		
+		Time time = new Time(hour, minute, second);
+        
+		String runSP = "{ call pisg2.WriteToLog(?,?,?) }";
+		try {
+			 conn.getDbConnection().createStatement();
+			 CallableStatement callableStatement = conn.getDbConnection().prepareCall(runSP);
+			 callableStatement.setInt(1, ID);
+			 callableStatement.setTime(2,time);
+			 try {
+				callableStatement.setString(3, Inet4Address.getLocalHost().getHostAddress());
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	         callableStatement.executeUpdate();
+	         
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+		
+}

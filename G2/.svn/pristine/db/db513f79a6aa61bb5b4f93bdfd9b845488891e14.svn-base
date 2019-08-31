@@ -1,0 +1,10 @@
+<table name="TIP_REGIONA">
+<column name="TR_oznaka" data_type="CHAR" null="NO" autoincrement="NO" isName="false" />
+<column name="TR_naziv" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" />
+<pk name="PK_TIP_REGIONA">
+<column name="TR_oznaka" />
+</pk>
+<reference table_name="REGION">
+<column name="TR_oznaka" />
+</reference>
+</table>

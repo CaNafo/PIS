@@ -1,0 +1,96 @@
+package model;
+
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class TableParser {
+		
+	public void getTable(String tableName) {
+		DatabaseConnection conn = DatabaseConnection.getInstance();
+		
+		
+		try {
+			DatabaseMetaData databaseMetaData = conn.getDbConnection().getMetaData();
+			//Print TABLE_TYPE "TABLE"
+			ResultSet columns = databaseMetaData.getColumns(null,null, tableName, null);
+			while(columns.next())
+			{
+			    String columnName = columns.getString("COLUMN_NAME");
+			    String datatype = columns.getString("DATA_TYPE");
+			    String columnsize = columns.getString("COLUMN_SIZE");
+			    String isNullable = columns.getString("IS_NULLABLE");
+			    String is_autoIncrment = columns.getString("IS_AUTOINCREMENT");
+			    
+			    switch (datatype) {
+			    case "-7":  datatype="BIT";
+			    	break;
+			    case "-6":	datatype="TINYINT";
+			    	break;
+			    case "-5":	datatype="BIGINT";
+			    	break;
+			    case "-4":	datatype="LONGVARBINARY";
+			    	break;
+			    case "-3":	datatype="VARBINARY";
+			    	break;
+			    case "-2":	datatype="BINARY";
+			    	break;
+			    case "-1":	datatype="LONGVARCHAR";
+			    	break;
+			    case "0":	datatype="NULL";
+			    	break;
+			    case "1":	datatype="CHAR";
+			    	break;
+			    case "2":	datatype="NUMERIC";
+			    	break;
+			    case "3":	datatype="DECIMAL";
+			    	break;
+			    case "4":	datatype="INTEGER";
+		    		break;
+			    case "5":	datatype="SMALLINT";
+		    		break;
+			    case "6":	datatype="FLOAT";
+			    	break;
+			    case "7":	datatype="REAL";
+			    	break;
+			    case "8":	datatype="DOUBLE";
+			    	break;
+			    case "12":	datatype="VARCHAR";  
+			   		break;
+			    case "91":	datatype="DATE";
+			    	break;
+			    case "92":	datatype="TIME";
+			    	break;
+			    case "93":	datatype="TIMESTAMP";
+			    	break;	
+			    case "1111": 	datatype="OTHER";
+			    	break;
+				}
+			    
+			    //Printing results
+			    System.out.println("Naziv: "+columnName + " Tip: " + datatype + " Velicina: " + columnsize+ " Null: " + isNullable + " AI: " + is_autoIncrment);
+			}
+			
+			ResultSet PK = databaseMetaData.getPrimaryKeys(null,null, tableName);
+			System.out.println("------------Primarni kljucevi -------------");
+			while(PK.next())
+			{
+			    System.out.println(PK.getString("COLUMN_NAME") + "===" + PK.getString("PK_NAME"));
+			}
+			
+			ResultSet FK = databaseMetaData.getImportedKeys(null, null, tableName);
+			System.out.println("------------Strani kljucevi-------------");
+			while(FK.next())
+			{
+			    System.out.println(FK.getString("PKTABLE_NAME") + "---" + FK.getString("PKCOLUMN_NAME") + "===" + FK.getString("FKTABLE_NAME") + "---" + FK.getString("FKCOLUMN_NAME"));
+			}
+						
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+}

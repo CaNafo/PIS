@@ -1,0 +1,11 @@
+<table name="Strucna sprema">
+<column name="SS_ID" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="SS_Stepen ss" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="SS_Naziv" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" length="128" />
+<pk name="PK_STRUCNA SPREMA">
+<column name="SS_ID" />
+</pk>
+<reference table_name="Kvalifikacije radnika">
+<column name="SS_ID" />
+</reference>
+</table>

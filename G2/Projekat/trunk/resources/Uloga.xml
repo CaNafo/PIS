@@ -1,0 +1,13 @@
+<table name="Uloga">
+<column name="UL_ID" data_type="INTEGER" null="NO" autoincrement="YES" isName="false" />
+<column name="UL_Naziv" data_type="VARCHAR" null="NO" autoincrement="NO" isName="true" length="20" />
+<pk name="PK_ULOGA">
+<column name="UL_ID" />
+</pk>
+<reference table_name="Lista dozvola">
+<column name="UL_ID" />
+</reference>
+<reference table_name="Lista Uloga">
+<column name="UL_ID" />
+</reference>
+</table>

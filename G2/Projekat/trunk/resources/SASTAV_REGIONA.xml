@@ -1,0 +1,14 @@
+<table name="SASTAV_REGIONA">
+<column name="REG_REG_oznaka" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<column name="REG_oznaka" data_type="INTEGER" null="NO" autoincrement="NO" isName="false" />
+<pk name="PK_SASTAV_REGIONA">
+<column name="REG_REG_oznaka" />
+<column name="REG_oznaka" />
+</pk>
+<fk name="FK_SASTAV_REGIONA" parent_table="REGION" >
+<column parent_name="REG_oznaka" child_name="REG_REG_oznaka" />
+</fk>
+<fk name="FK_SASTAV_REGIONA2" parent_table="REGION" >
+<column parent_name="REG_oznaka" child_name="REG_oznaka" />
+</fk>
+</table>
